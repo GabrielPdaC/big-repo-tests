@@ -54,6 +54,15 @@ git add --sparse [file]
 
 ## Visão da implementação de script facilitador do uso do sparse-checkout
 
-* Criar um script facilitador que vai fazer automaticamente a inicialização do sparse-checout e também vai adicionar os arquivo com ```git sparse-checkout add``` no arquivo de sparse-checkout[^1].
+* Criar um script facilitador que vai fazer automaticamente a inicialização do sparse-checkout e também vai adicionar os arquivo com ```git sparse-checkout add``` no arquivo de sparse-checkout[^1]. O commit e o push será feito normalmente sem facilitador.
+
+### Descrição de funcionamento do Script (GitSparseChekout.rb):
+
+* Descrição dos métodos:
+
+    Nome| Descrição | Parâmetros | Funcionamento
+    --- | --- | --- | --- |
+    Init| Inicialização do sparse-checkout no repositório local | 1. Https do Repositório | 1. Faz o clone sem checkout com ```git clone --no-checkout```; <br> 2. Faz inicilização do sparse-checkout ```git sparse-checkout init --no-cone```; <br> 3. Configura o arquivo sparse-checkout como vazio ```git sparse-checkout set #```;
+    Checkout| Faz checkout do arquivo para branch especificada  | 1. Branch; <br> 2. Nome do arquivo/diretório <br> | 1. Insere arquivo/diretório no arquivo sparse-checkout com ```git sparse-checkout add [file]```; <br> 2. Realiza o checkout com ```git checkout [branch]```;
 
 [^1]: O arquivo fica localizado em: .git/info/sparse-checkout
