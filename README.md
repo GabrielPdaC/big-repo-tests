@@ -1,6 +1,6 @@
 # Estudo do uso de sparse-checkout para big repo's no git
 
-Estudo voltado ao uso do git sparse-checkout para big repo com maioria dos arquivos no root do projeto. Trata-se de um diretório de scripts utilitários, os quais são utilizados em larga escalada na rede interna.
+Estudo voltado ao uso do git [sparse-checkout](https://git-scm.com/docs/git-sparse-checkout) para big repo com maioria dos arquivos no root do projeto. Trata-se de um diretório de scripts utilitários, os quais são utilizados em larga escalada na rede interna.
 
 ## Como utilizar o git sparse-checkout para não baixar todo repositório local:
 
@@ -44,11 +44,16 @@ git sparse-checkout reapply
 git checkout [branch]
 ```
 
-* Para fazer add de arquivos que não estão em diretórios do sparse-checkout, podemos utilizar o seguinte comando
+* Para fazer add de arquivos que não estão em diretórios do sparse-checkout, podemos utilizar o seguinte comando:
+* Vale ressaltar que isso não inclui o arquivo no arquivo sparse-checkout[^1]. Então o melhor é inserir no arquivo utilizando o ```sparse-checkout add [file]``` após fazer stash da alteração.
 ```git
 git add --sparse [file]
 ```
 
 * No restante, basta seguir fluxo normal, com ```git commit``` e ```git push```
+
+## Visão da implementação de script facilitador do uso do sparse-checkout
+
+* Criar um script facilitador que vai fazer automaticamente a inicialização do sparse-checout e também vai adicionar os arquivo com ```git sparse-checkout add``` no arquivo de sparse-checkout[^1].
 
 [^1]: O arquivo fica localizado em: .git/info/sparse-checkout
