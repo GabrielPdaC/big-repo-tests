@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Listing changed files..."
+    - git fetch origin
+    - git diff --name-only origin/master...HEAD
+  only:
+    - master
